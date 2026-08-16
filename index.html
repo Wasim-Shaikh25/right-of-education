@@ -709,12 +709,14 @@
       const subject = encodeURIComponent(subjectRaw);
       const body = encodeURIComponent(bodyRaw);
 
-      // Gmail's own compose URL reliably opens Gmail web with the body filled in.
-      // A plain "mailto:" link instead falls back to whatever mail handler the
-      // OS/browser has registered (which may not be Gmail at all, and often
-      // drops or truncates the body), so it is kept only as a manual fallback.
+      // On desktop, Gmail's own compose URL reliably opens Gmail web with the
+      // body filled in. On mobile, that same URL just opens Gmail in the
+      // mobile browser instead of deep-linking into the native Gmail app, so
+      // mobile uses a "mailto:" link instead, which the OS routes to the
+      // installed Gmail app (if set as the default mail handler).
       const gmailComposeLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailTo)}&su=${subject}&body=${body}`;
       const mailtoLink = `mailto:${emailTo}?subject=${subject}&body=${body}`;
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
       const fallbackLink = document.getElementById('fallbackMailtoLink');
       if (fallbackLink) {
@@ -725,7 +727,11 @@
       successScreen.classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      window.open(gmailComposeLink, '_blank', 'noopener,noreferrer');
+      if (isMobile) {
+        window.location.href = mailtoLink;
+      } else {
+        window.open(gmailComposeLink, '_blank', 'noopener,noreferrer');
+      }
     });
   </script>
 </body>
