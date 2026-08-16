@@ -583,7 +583,8 @@
             id="name"
             name="name"
             class="input-field"
-            placeholder="Your full name (optional)"
+            placeholder="Your full name"
+            required
           >
         </div>
         <div class="input-group">
@@ -593,18 +594,9 @@
             id="mobile"
             name="mobile"
             class="input-field"
-            placeholder="Your mobile number (optional)"
+            placeholder="Your mobile number"
             pattern="[0-9\-\+\s\(\)]+"
-          >
-        </div>
-        <div class="input-group">
-          <label class="input-label">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            class="input-field"
-            placeholder="Your email address (optional)"
+            required
           >
         </div>
       </div>
@@ -666,9 +658,8 @@
       e.preventDefault();
 
       const formData = new FormData(form);
-      const name = formData.get('name') || 'Not provided';
-      const mobile = formData.get('mobile') || 'Not provided';
-      const email = formData.get('email') || 'Not provided';
+      const name = formData.get('name');
+      const mobile = formData.get('mobile');
       const studyStatus = formData.get('study_status');
       const nocDiscomfort = formData.get('noc_discomfort');
       const nocImpact = formData.get('noc_impact');
@@ -692,8 +683,7 @@
         `CONTACT INFORMATION\n` +
         `${DIVIDER}\n` +
         `Name:    ${name}\n` +
-        `Mobile:  ${mobile}\n` +
-        `Email:   ${email}\n\n` +
+        `Mobile:  ${mobile}\n\n` +
         `SURVEY RESPONSES\n` +
         `${DIVIDER}\n` +
         `1) Are you currently studying or do you want to pursue higher education?\n` +
