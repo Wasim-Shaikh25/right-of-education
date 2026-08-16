@@ -622,9 +622,9 @@
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
       </div>
       <h2>Submitted Successfully</h2>
-      <p>Thank you for sharing your response. A new tab should have opened with your email application, with your response prepared.</p>
+      <p>Thank you for sharing your response. A new tab should have opened with a Gmail draft, with your full response prepared.</p>
       <p>Please review it in that tab and hit send to complete your submission.</p>
-      <p class="success-note">If nothing opened, please email your responses directly to kwasim80@gmail.com.</p>
+      <p class="success-note">If nothing opened, or if it opened in the wrong app, <a id="fallbackMailtoLink" href="#">click here</a> to open your default email app instead, or email your responses directly to kwasim80@gmail.com.</p>
     </div>
   </div>
 
@@ -677,8 +677,8 @@
       const comments = formData.get('comments') || 'No additional comments';
       const selfDeclaration = formData.get('self_declaration') ? 'Agreed' : 'Not agreed';
 
-      const subject = encodeURIComponent('Employer NOC Impact Survey Response');
-      const body = encodeURIComponent(
+      const subjectRaw = 'Employer NOC Impact Survey Response';
+      const bodyRaw =
         `WORKING AND STUDYING: EMPLOYER NOC IMPACT SURVEY RESPONSE\n` +
         `==========================================================\n\n` +
         `Name: ${name}\n` +
@@ -691,23 +691,35 @@
         `3. NOC Would Affect Educational Plans: ${nocImpactMap[nocImpact] || nocImpact}\n` +
         `4. Can Comply with Attendance/Academic Norms: ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n` +
         `5. Willing to Discuss with Legal Representative: ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
-        `EXPERIENCE / COMMENTS:\n` +
-        `----------------------\n` +
-        `${comments}\n\n` +
         `SELF DECLARATION:\n` +
         `-----------------\n` +
         `Declaration Agreed: ${selfDeclaration}\n\n` +
+        `EXPERIENCE / COMMENTS:\n` +
+        `----------------------\n` +
+        `${comments}\n\n` +
         `---\n` +
-        `(This is an automated response from the Employer NOC Impact Survey)`
-      );
+        `(This is an automated response from the Employer NOC Impact Survey)`;
 
+      const subject = encodeURIComponent(subjectRaw);
+      const body = encodeURIComponent(bodyRaw);
+
+      // Gmail's own compose URL reliably opens Gmail web with the body filled in.
+      // A plain "mailto:" link instead falls back to whatever mail handler the
+      // OS/browser has registered (which may not be Gmail at all, and often
+      // drops or truncates the body), so it is kept only as a manual fallback.
+      const gmailComposeLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailTo)}&su=${subject}&body=${body}`;
       const mailtoLink = `mailto:${emailTo}?subject=${subject}&body=${body}`;
+
+      const fallbackLink = document.getElementById('fallbackMailtoLink');
+      if (fallbackLink) {
+        fallbackLink.href = mailtoLink;
+      }
 
       formWrapper.style.display = 'none';
       successScreen.classList.add('show');
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      window.open(mailtoLink, '_blank', 'noopener,noreferrer');
+      window.open(gmailComposeLink, '_blank', 'noopener,noreferrer');
     });
   </script>
 </body>
