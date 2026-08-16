@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Working and Studying: Employer NOC Impact</title>
+  <style>
+    :root {
+      --slate: #2C3E50;
+      --teal: #16A085;
+      --off-white: #F8F7F5;
+      --text: #1F1F1F;
+      --border: #D4D0C8;
+      --text-light: #5A5A5A;
+
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 3rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --slate: #E8EEF5;
+        --off-white: #1A1A1A;
+        --text: #F5F5F5;
+        --border: #3A3A3A;
+        --text-light: #B0B0B0;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --slate: #E8EEF5;
+      --off-white: #1A1A1A;
+      --text: #F5F5F5;
+      --border: #3A3A3A;
+      --text-light: #B0B0B0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text);
+      background: var(--off-white);
+      line-height: 1.6;
+    }
+
+    body {
+      padding: var(--spacing-md);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: var(--spacing-xl);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .header {
+      margin-bottom: var(--spacing-xl);
+      text-align: center;
+    }
+
+    h1 {
+      font-family: Georgia, Cambria, serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      line-height: 1.3;
+      text-wrap: balance;
+      color: var(--slate);
+      margin-bottom: var(--spacing-md);
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .info-box {
+      background: rgba(44, 62, 80, 0.04);
+      border: 1px solid var(--border);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      border-radius: 4px;
+      line-height: 1.8;
+    }
+
+    .info-box p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .info-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-box .lead {
+      color: var(--text);
+    }
+
+    .info-box .note {
+      font-size: 0.85rem;
+      font-style: italic;
+    }
+
+    .privacy-notice {
+      background: rgba(22, 160, 133, 0.08);
+      border-left: 3px solid var(--teal);
+      padding: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+      border-radius: 2px;
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .privacy-notice strong {
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .form-section {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .section-title {
+      font-family: Georgia, Cambria, serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--slate);
+      margin-bottom: var(--spacing-md);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: var(--teal);
+      color: var(--off-white);
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .question-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    label {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+      cursor: pointer;
+      padding: var(--spacing-sm);
+      margin: 0 -var(--spacing-sm);
+      border-radius: 4px;
+      transition: background 0.15s ease;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    label:hover {
+      background: rgba(22, 160, 133, 0.04);
+    }
+
+    input[type="radio"],
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      flex-shrink: 0;
+      cursor: pointer;
+      accent-color: var(--teal);
+    }
+
+    input[type="radio"]:focus,
+    input[type="checkbox"]:focus {
+      outline: 2px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    .question-text {
+      flex: 1;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: var(--spacing-sm) var(--spacing-md);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: var(--off-white);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.1);
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--slate);
+      margin-bottom: var(--spacing-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-group {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .submit-section {
+      margin-top: var(--spacing-xl);
+      display: flex;
+      gap: var(--spacing-md);
+      flex-direction: column;
+    }
+
+    button {
+      padding: var(--spacing-md) var(--spacing-lg);
+      border: none;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .btn-primary {
+      background: var(--teal);
+      color: var(--off-white);
+    }
+
+    .btn-primary:hover {
+      background: #0E8060;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(22, 160, 133, 0.25);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 6px rgba(22, 160, 133, 0.15);
+    }
+
+    .btn-primary:disabled {
+      background: var(--border);
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none;
+    }
+
+    .footer-text {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .success-screen {
+      display: none;
+      text-align: center;
+      padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .success-screen.show {
+      display: block;
+      animation: slideIn 0.4s ease;
+    }
+
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto var(--spacing-lg);
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .success-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--off-white);
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .success-screen h2 {
+      font-family: Georgia, Cambria, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--slate);
+      margin-bottom: var(--spacing-md);
+      text-wrap: balance;
+    }
+
+    .success-screen p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 420px;
+      margin: 0 auto var(--spacing-sm);
+    }
+
+    .success-screen .success-note {
+      font-size: 0.85rem;
+      font-style: italic;
+      margin-top: var(--spacing-lg);
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.35rem;
+      }
+
+      body {
+        padding: var(--spacing-sm);
+        padding-top: var(--spacing-md);
+      }
+
+      label {
+        gap: var(--spacing-xs);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="formWrapper">
+    <div class="header">
+      <h1>Working and Studying: Understanding the Impact of Employer NOC Requirements</h1>
+    </div>
+
+    <div class="info-box">
+      <p class="lead"><strong>About this campaign</strong></p>
+      <p>This independent campaign is collecting responses from working people and students to document the practical impact of employer NOC requirements on access to higher education. The information may be shared with an established legal organisation for the purpose of evaluating a possible legal challenge.</p>
+      <p>We believe working people deserve a genuine opportunity to pursue higher education, and that this opportunity should not depend on an employer's permission. Your voice can help build the evidence needed to make that case.</p>
+      <p class="note">This is an independent public-interest campaign and is not an official BCI or government initiative.</p>
+    </div>
+
+    <div class="privacy-notice">
+      <strong>Privacy:</strong> Individual responses and contact details will not be publicly published by the campaign. If you separately consent to being contacted by a legal organisation, your contact information may be shared with that organisation for that limited purpose.
+    </div>
+
+    <form id="nocForm">
+      <!-- Section 1: Study Status -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">1</span>
+          Are you currently studying or do you want to pursue higher education?
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="study_status" value="studying" required>
+            <span class="question-text">Currently studying (not working)</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="study_status" value="working_and_studying">
+            <span class="question-text">Working and studying</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="study_status" value="working_want_study">
+            <span class="question-text">Working and want to study</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="study_status" value="other">
+            <span class="question-text">Other</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 2: NOC Discomfort -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">2</span>
+          If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_discomfort" value="fear" required>
+            <span class="question-text">Yes, because I fear an adverse employment response</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_discomfort" value="other">
+            <span class="question-text">Yes, for other reasons</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_discomfort" value="no">
+            <span class="question-text">No</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_discomfort" value="na">
+            <span class="question-text">Not applicable</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 3: NOC Impact -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">3</span>
+          Would the employer-NOC requirement affect your decision or ability to pursue higher education?
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_impact" value="yes" required>
+            <span class="question-text">Yes</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_impact" value="no">
+            <span class="question-text">No</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_impact" value="not_sure">
+            <span class="question-text">Not sure</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="noc_impact" value="na">
+            <span class="question-text">Not applicable</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 4: Attendance Compliance -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">4</span>
+          If you work while studying, can you comply with the required attendance and academic norms?
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="attendance_compliance" value="yes" required>
+            <span class="question-text">Yes, I can comply</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="attendance_compliance" value="no">
+            <span class="question-text">No, I may not be able to comply</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="attendance_compliance" value="depends">
+            <span class="question-text">It depends on the institution's requirements</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="attendance_compliance" value="na">
+            <span class="question-text">Not applicable</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 5: Willing to discuss with legal representative -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">5</span>
+          Optional: Would you be willing to discuss your experience with a legal representative?
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="willing_legal" value="yes">
+            <span class="question-text">Yes</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="willing_legal" value="no">
+            <span class="question-text">No</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 6: Optional Comment -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">6</span>
+          Optional: Share your experience
+        </div>
+        <div class="input-group">
+          <textarea
+            id="comments"
+            name="comments"
+            class="input-field"
+            placeholder="Anything else you'd like to share about your experience..."
+            rows="4"
+            style="resize: vertical; font-family: inherit; line-height: 1.6;"
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Section 7: Self Declaration -->
+      <div class="form-section" style="background: rgba(22, 160, 133, 0.05); border: 1px solid var(--border); padding: var(--spacing-lg); border-radius: 4px;">
+        <div class="section-title">
+          <span class="section-number">7</span>
+          Self Declaration
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="checkbox" name="self_declaration" value="agree" required>
+            <span class="question-text" style="font-size: 0.9rem;">I confirm that the information I have provided is true and accurate to the best of my knowledge. I understand that this information is being collected to assess the real-world impact of employer NOC requirements and may be reviewed by legal representatives evaluating a possible legal challenge.</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">8</span>
+          Contact Information
+        </div>
+        <div class="input-group">
+          <label class="input-label">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="input-field"
+            placeholder="Your full name (optional)"
+          >
+        </div>
+        <div class="input-group">
+          <label class="input-label">Mobile Number</label>
+          <input
+            type="tel"
+            id="mobile"
+            name="mobile"
+            class="input-field"
+            placeholder="Your mobile number (optional)"
+            pattern="[0-9\-\+\s\(\)]+"
+          >
+        </div>
+        <div class="input-group">
+          <label class="input-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="input-field"
+            placeholder="Your email address (optional)"
+          >
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-section">
+        <button type="submit" class="btn-primary">Send My Response</button>
+        <p class="footer-text">Clicking "Send My Response" will open your email application with your response prepared for you. Please review it and send it from your own email account.</p>
+      </div>
+    </form>
+    </div>
+
+    <div id="successScreen" class="success-screen">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2>Submitted Successfully</h2>
+      <p>Thank you for sharing your response. A new tab should have opened with your email application, with your response prepared.</p>
+      <p>Please review it in that tab and hit send to complete your submission.</p>
+      <p class="success-note">If nothing opened, please email your responses directly to kwasim80@gmail.com.</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('nocForm');
+    const formWrapper = document.getElementById('formWrapper');
+    const successScreen = document.getElementById('successScreen');
+    const emailTo = 'kwasim80@gmail.com';
+
+    const studyStatusMap = {
+      'studying': 'Currently studying (not working)',
+      'working_and_studying': 'Working and studying',
+      'working_want_study': 'Working and want to study',
+      'other': 'Other'
+    };
+
+    const nocDiscomfortMap = {
+      'fear': 'Yes, because I fear an adverse employment response',
+      'other': 'Yes, for other reasons',
+      'no': 'No',
+      'na': 'Not applicable'
+    };
+
+    const nocImpactMap = {
+      'yes': 'Yes',
+      'no': 'No',
+      'not_sure': 'Not sure',
+      'na': 'Not applicable'
+    };
+
+    const attendanceComplianceMap = {
+      'yes': 'Yes, I can comply',
+      'no': 'No, I may not be able to comply',
+      'depends': "It depends on the institution's requirements",
+      'na': 'Not applicable'
+    };
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const name = formData.get('name') || 'Not provided';
+      const mobile = formData.get('mobile') || 'Not provided';
+      const email = formData.get('email') || 'Not provided';
+      const studyStatus = formData.get('study_status');
+      const nocDiscomfort = formData.get('noc_discomfort');
+      const nocImpact = formData.get('noc_impact');
+      const attendanceCompliance = formData.get('attendance_compliance');
+      const willingLegal = formData.get('willing_legal') || 'Not answered';
+      const comments = formData.get('comments') || 'No additional comments';
+      const selfDeclaration = formData.get('self_declaration') ? 'Agreed' : 'Not agreed';
+
+      const subject = encodeURIComponent('Employer NOC Impact Survey Response');
+      const body = encodeURIComponent(
+        `WORKING AND STUDYING: EMPLOYER NOC IMPACT SURVEY RESPONSE\n` +
+        `==========================================================\n\n` +
+        `Name: ${name}\n` +
+        `Mobile: ${mobile}\n` +
+        `Email: ${email}\n\n` +
+        `RESPONSES:\n` +
+        `----------\n` +
+        `1. Study Status: ${studyStatusMap[studyStatus] || studyStatus}\n` +
+        `2. NOC Discomfort: ${nocDiscomfortMap[nocDiscomfort] || nocDiscomfort}\n` +
+        `3. NOC Would Affect Educational Plans: ${nocImpactMap[nocImpact] || nocImpact}\n` +
+        `4. Can Comply with Attendance/Academic Norms: ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n` +
+        `5. Willing to Discuss with Legal Representative: ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
+        `EXPERIENCE / COMMENTS:\n` +
+        `----------------------\n` +
+        `${comments}\n\n` +
+        `SELF DECLARATION:\n` +
+        `-----------------\n` +
+        `Declaration Agreed: ${selfDeclaration}\n\n` +
+        `---\n` +
+        `(This is an automated response from the Employer NOC Impact Survey)`
+      );
+
+      const mailtoLink = `mailto:${emailTo}?subject=${subject}&body=${body}`;
+
+      formWrapper.style.display = 'none';
+      successScreen.classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      window.open(mailtoLink, '_blank', 'noopener,noreferrer');
+    });
+  </script>
+</body>
+</html>
