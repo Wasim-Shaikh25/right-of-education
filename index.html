@@ -677,39 +677,43 @@
       const comments = formData.get('comments') || 'No additional comments';
       const selfDeclaration = formData.get('self_declaration') ? 'Agreed' : 'Not agreed';
 
+      const DIVIDER = '─'.repeat(50);
+
       const subjectRaw = 'Employer NOC Impact Survey Response';
       const bodyRaw =
         `WORKING AND STUDYING: EMPLOYER NOC IMPACT SURVEY RESPONSE\n` +
-        `==========================================================\n\n` +
-        `ABOUT THIS CAMPAIGN:\n` +
-        `---------------------\n` +
+        `${'═'.repeat(50)}\n\n` +
+        `ABOUT THIS CAMPAIGN\n` +
+        `${DIVIDER}\n` +
         `This independent campaign is collecting responses from working people and students to document the practical impact of employer NOC requirements on access to higher education. The information may be shared with an established legal organisation for the purpose of evaluating a possible legal challenge.\n\n` +
         `We believe working people deserve a genuine opportunity to pursue higher education, and that this opportunity should not depend on an employer's permission. Your voice can help build the evidence needed to make that case.\n\n` +
         `This is an independent public-interest campaign and is not an official BCI or government initiative.\n\n` +
-        `PRIVACY: Individual responses and contact details will not be publicly published by the campaign. If you separately consent to being contacted by a legal organisation, your contact information may be shared with that organisation for that limited purpose.\n\n` +
-        `Name: ${name}\n` +
-        `Mobile: ${mobile}\n` +
-        `Email: ${email}\n\n` +
-        `RESPONSES:\n` +
-        `----------\n` +
-        `Q1. Are you currently studying or do you want to pursue higher education?\n` +
-        `A1. ${studyStatusMap[studyStatus] || studyStatus}\n\n` +
-        `Q2. If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?\n` +
-        `A2. ${nocDiscomfortMap[nocDiscomfort] || nocDiscomfort}\n\n` +
-        `Q3. Would the employer-NOC requirement affect your decision or ability to pursue higher education?\n` +
-        `A3. ${nocImpactMap[nocImpact] || nocImpact}\n\n` +
-        `Q4. If you work while studying, can you comply with the required attendance and academic norms?\n` +
-        `A4. ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n\n` +
-        `Q5. Optional: Would you be willing to discuss your experience with a legal representative?\n` +
-        `A5. ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
-        `Q6. Optional: Share your experience\n` +
-        `A6. ${comments}\n\n` +
-        `SELF DECLARATION:\n` +
-        `-----------------\n` +
+        `Privacy: Individual responses and contact details will not be publicly published by the campaign. If you separately consent to being contacted by a legal organisation, your contact information may be shared with that organisation for that limited purpose.\n\n` +
+        `CONTACT INFORMATION\n` +
+        `${DIVIDER}\n` +
+        `Name:    ${name}\n` +
+        `Mobile:  ${mobile}\n` +
+        `Email:   ${email}\n\n` +
+        `SURVEY RESPONSES\n` +
+        `${DIVIDER}\n` +
+        `1) Are you currently studying or do you want to pursue higher education?\n` +
+        `   → ${studyStatusMap[studyStatus] || studyStatus}\n\n` +
+        `2) If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?\n` +
+        `   → ${nocDiscomfortMap[nocDiscomfort] || nocDiscomfort}\n\n` +
+        `3) Would the employer-NOC requirement affect your decision or ability to pursue higher education?\n` +
+        `   → ${nocImpactMap[nocImpact] || nocImpact}\n\n` +
+        `4) If you work while studying, can you comply with the required attendance and academic norms?\n` +
+        `   → ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n\n` +
+        `5) Optional: Would you be willing to discuss your experience with a legal representative?\n` +
+        `   → ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
+        `6) Optional: Share your experience\n` +
+        `   → ${comments}\n\n` +
+        `SELF DECLARATION\n` +
+        `${DIVIDER}\n` +
         `"I confirm that the information I have provided is true and accurate to the best of my knowledge. I understand that this information is being collected to assess the real-world impact of employer NOC requirements and may be reviewed by legal representatives evaluating a possible legal challenge."\n\n` +
         `Declaration Agreed: ${selfDeclaration}\n\n` +
-        `---\n` +
-        `(This is an automated response from the Employer NOC Impact Survey)`;
+        `${DIVIDER}\n` +
+        `This is an automated response from the Employer NOC Impact Survey.`;
 
       const subject = encodeURIComponent(subjectRaw);
       const body = encodeURIComponent(bodyRaw);
