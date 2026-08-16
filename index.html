@@ -692,17 +692,22 @@
         `Email: ${email}\n\n` +
         `RESPONSES:\n` +
         `----------\n` +
-        `1. Study Status: ${studyStatusMap[studyStatus] || studyStatus}\n` +
-        `2. NOC Discomfort: ${nocDiscomfortMap[nocDiscomfort] || nocDiscomfort}\n` +
-        `3. NOC Would Affect Educational Plans: ${nocImpactMap[nocImpact] || nocImpact}\n` +
-        `4. Can Comply with Attendance/Academic Norms: ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n` +
-        `5. Willing to Discuss with Legal Representative: ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
+        `Q1. Are you currently studying or do you want to pursue higher education?\n` +
+        `A1. ${studyStatusMap[studyStatus] || studyStatus}\n\n` +
+        `Q2. If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?\n` +
+        `A2. ${nocDiscomfortMap[nocDiscomfort] || nocDiscomfort}\n\n` +
+        `Q3. Would the employer-NOC requirement affect your decision or ability to pursue higher education?\n` +
+        `A3. ${nocImpactMap[nocImpact] || nocImpact}\n\n` +
+        `Q4. If you work while studying, can you comply with the required attendance and academic norms?\n` +
+        `A4. ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n\n` +
+        `Q5. Optional: Would you be willing to discuss your experience with a legal representative?\n` +
+        `A5. ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
+        `Q6. Optional: Share your experience\n` +
+        `A6. ${comments}\n\n` +
         `SELF DECLARATION:\n` +
         `-----------------\n` +
+        `"I confirm that the information I have provided is true and accurate to the best of my knowledge. I understand that this information is being collected to assess the real-world impact of employer NOC requirements and may be reviewed by legal representatives evaluating a possible legal challenge."\n\n` +
         `Declaration Agreed: ${selfDeclaration}\n\n` +
-        `EXPERIENCE / COMMENTS:\n` +
-        `----------------------\n` +
-        `${comments}\n\n` +
         `---\n` +
         `(This is an automated response from the Employer NOC Impact Survey)`;
 
