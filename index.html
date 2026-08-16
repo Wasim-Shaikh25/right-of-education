@@ -422,10 +422,42 @@
         </div>
       </div>
 
-      <!-- Section 2: NOC Discomfort -->
+      <!-- Section 2: Higher Education Type -->
       <div class="form-section">
         <div class="section-title">
           <span class="section-number">2</span>
+          What higher education are you currently pursuing or planning to pursue?
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="education_type" value="llb" required>
+            <span class="question-text">LL.B.</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="education_type" value="other_professional">
+            <span class="question-text">Other professional degree</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="education_type" value="other_higher">
+            <span class="question-text">Other higher education</span>
+          </label>
+        </div>
+        <div class="question-group">
+          <label>
+            <input type="radio" name="education_type" value="not_decided">
+            <span class="question-text">Not decided</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Section 3: NOC Discomfort -->
+      <div class="form-section">
+        <div class="section-title">
+          <span class="section-number">3</span>
           If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?
         </div>
         <div class="question-group">
@@ -454,10 +486,10 @@
         </div>
       </div>
 
-      <!-- Section 3: NOC Impact -->
+      <!-- Section 4: NOC Impact -->
       <div class="form-section">
         <div class="section-title">
-          <span class="section-number">3</span>
+          <span class="section-number">4</span>
           Would the employer-NOC requirement affect your decision or ability to pursue higher education?
         </div>
         <div class="question-group">
@@ -486,10 +518,10 @@
         </div>
       </div>
 
-      <!-- Section 4: Attendance Compliance -->
+      <!-- Section 5: Attendance Compliance -->
       <div class="form-section">
         <div class="section-title">
-          <span class="section-number">4</span>
+          <span class="section-number">5</span>
           If you work while studying, can you comply with the required attendance and academic norms?
         </div>
         <div class="question-group">
@@ -518,10 +550,10 @@
         </div>
       </div>
 
-      <!-- Section 5: Willing to discuss with legal representative -->
+      <!-- Section 6: Willing to discuss with legal representative -->
       <div class="form-section">
         <div class="section-title">
-          <span class="section-number">5</span>
+          <span class="section-number">6</span>
           Optional: Would you be willing to discuss your experience with a legal representative?
         </div>
         <div class="question-group">
@@ -538,10 +570,10 @@
         </div>
       </div>
 
-      <!-- Section 6: Optional Comment -->
+      <!-- Section 7: Optional Comment -->
       <div class="form-section">
         <div class="section-title">
-          <span class="section-number">6</span>
+          <span class="section-number">7</span>
           Optional: Share your experience
         </div>
         <div class="input-group">
@@ -556,10 +588,10 @@
         </div>
       </div>
 
-      <!-- Section 7: Self Declaration -->
+      <!-- Section 8: Self Declaration -->
       <div class="form-section" style="background: rgba(22, 160, 133, 0.05); border: 1px solid var(--border); padding: var(--spacing-lg); border-radius: 4px;">
         <div class="section-title">
-          <span class="section-number">7</span>
+          <span class="section-number">8</span>
           Self Declaration
         </div>
         <div class="question-group">
@@ -573,7 +605,7 @@
       <!-- Contact Information -->
       <div class="form-section">
         <div class="section-title">
-          <span class="section-number">8</span>
+          <span class="section-number">9</span>
           Contact Information
         </div>
         <div class="input-group">
@@ -633,6 +665,13 @@
       'other': 'Other'
     };
 
+    const educationTypeMap = {
+      'llb': 'LL.B.',
+      'other_professional': 'Other professional degree',
+      'other_higher': 'Other higher education',
+      'not_decided': 'Not decided'
+    };
+
     const nocDiscomfortMap = {
       'fear': 'Yes, because I fear an adverse employment response',
       'other': 'Yes, for other reasons',
@@ -661,6 +700,7 @@
       const name = formData.get('name');
       const mobile = formData.get('mobile');
       const studyStatus = formData.get('study_status');
+      const educationType = formData.get('education_type');
       const nocDiscomfort = formData.get('noc_discomfort');
       const nocImpact = formData.get('noc_impact');
       const attendanceCompliance = formData.get('attendance_compliance');
@@ -688,15 +728,17 @@
         `${DIVIDER}\n` +
         `1) Are you currently studying or do you want to pursue higher education?\n` +
         `   → ${studyStatusMap[studyStatus] || studyStatus}\n\n` +
-        `2) If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?\n` +
+        `2) What higher education are you currently pursuing or planning to pursue?\n` +
+        `   → ${educationTypeMap[educationType] || educationType}\n\n` +
+        `3) If an employer NOC were required, would you feel uncomfortable, hesitant or concerned about asking your employer for it?\n` +
         `   → ${nocDiscomfortMap[nocDiscomfort] || nocDiscomfort}\n\n` +
-        `3) Would the employer-NOC requirement affect your decision or ability to pursue higher education?\n` +
+        `4) Would the employer-NOC requirement affect your decision or ability to pursue higher education?\n` +
         `   → ${nocImpactMap[nocImpact] || nocImpact}\n\n` +
-        `4) If you work while studying, can you comply with the required attendance and academic norms?\n` +
+        `5) If you work while studying, can you comply with the required attendance and academic norms?\n` +
         `   → ${attendanceComplianceMap[attendanceCompliance] || attendanceCompliance}\n\n` +
-        `5) Optional: Would you be willing to discuss your experience with a legal representative?\n` +
+        `6) Optional: Would you be willing to discuss your experience with a legal representative?\n` +
         `   → ${willingLegal === 'yes' ? 'Yes' : willingLegal === 'no' ? 'No' : 'Not answered'}\n\n` +
-        `6) Optional: Share your experience\n` +
+        `7) Optional: Share your experience\n` +
         `   → ${comments}\n\n` +
         `SELF DECLARATION\n` +
         `${DIVIDER}\n` +
